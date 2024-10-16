@@ -1,12 +1,26 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
+import pets from "../data/pets";
 
 const btnStyle =
   "m-4 p-2 bg-palette-primary text-white rounded-sm font-primary font-semibold  hover:bg-palette-dark";
 
 function PetItem({ pet }) {
   const [pic, setPic] = useState(pet.image);
+
+  const [isAdopted, setIsAdopted] = useState(false);
+
+  // const filterAdopted = pets.filter((pet) => pet.id === adoptList);
+
+  // const adoptPetAction = (id) => {
+  //   console.log();
+  //   setAdoptList(...adoptList, id);
+  // };
+
+  const petAdopted = () => {
+    setIsAdopted(true);
+  };
 
   const changePic = () => {
     if (pic === pet.image) {
@@ -15,6 +29,8 @@ function PetItem({ pet }) {
       setPic(pet.image);
     }
   };
+
+  if (isAdopted) return null;
 
   return (
     <div className="h-120 w-72 rounded shadow-lg mx-auto border border-palette-lighter">
@@ -38,7 +54,7 @@ function PetItem({ pet }) {
           <button onClick={changePic} type="button" className={btnStyle}>
             Pet
           </button>
-          <button type="button" className={btnStyle}>
+          <button onClick={petAdopted} type="button" className={btnStyle}>
             Adopt
           </button>
         </div>
