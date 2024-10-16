@@ -6,6 +6,7 @@ import PetItem from "./PetItem";
 function PetsList() {
   const [query, setQuery] = useState("");
   const [type, setType] = useState("");
+  const [adopt, setAdopt] = useState([]);
 
   const petList = pets
     .filter((pet) => {
@@ -14,14 +15,22 @@ function PetsList() {
       } else return pet.type === type;
     })
     .filter((pet) => pet.name.toLowerCase().includes(query.toLowerCase()))
+    // .filter((adoptedPet) => adoptedPet)
     .map((pet) => <PetItem pet={pet} key={pet.id} />);
 
   const searchPet = () => {
+    console.log(petList);
     setQuery(event.target.value);
   };
+
   const searchType = (e) => {
     setType(e.target.value);
   };
+  const adoptPet = (id) => {
+    setAdopt(...adopt, id);
+  };
+
+  const adoptedPetRemove = petList.filter((pet) => pet.id == pet.id);
 
   // const filterPetName = pets.filter((pet) =>
   //   pet.name.toLowerCase().includes(query.toLowerCase())
